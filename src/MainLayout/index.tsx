@@ -21,7 +21,7 @@ const MainLayout = ({ children }: ILayoutProps) => {
       <Main>{children}</Main>
       <Divider/>
       <Footer>
-      <Typography variant="body2" ml="20px">2023 All right reserved</Typography>
+      <Typography variant="body2">2023 All right reserved</Typography>
       </Footer>
     </>
   );
