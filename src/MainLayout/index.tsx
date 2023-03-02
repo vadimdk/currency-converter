@@ -2,7 +2,7 @@ import { Divider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { ReactNode } from "react";
 import { Footer, Header, Main } from "./styles";
-import flagImg from "./../assets/icons8-ukraine-48.png"
+import flagImg from "./../assets/icons8-ukraine-48.png";
 
 interface ILayoutProps {
   children: ReactNode;
@@ -15,13 +15,15 @@ const MainLayout = ({ children }: ILayoutProps) => {
         <Box width="48px" height="48px">
           <img src={flagImg} alt="flag" />
         </Box>
-        <Typography variant="h5" ml="20px">Currency converter</Typography>
+        <Typography variant="h5" ml="20px">
+          Currency converter
+        </Typography>
       </Header>
-      <Divider/>
+      <Divider />
       <Main>{children}</Main>
-      <Divider/>
+      <Divider />
       <Footer>
-      <Typography variant="body2">2023 All right reserved</Typography>
+        <Typography variant="body2">2023 All right reserved</Typography>
       </Footer>
     </>
   );
