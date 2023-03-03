@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Grid, Paper } from "@mui/material";
 import TableCell from "./components/TableCell";
 import { useGetExchangeRateQuery } from "../../services/GetRates";
