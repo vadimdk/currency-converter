@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Paper } from "@mui/material";
 import TableCell from "./components/TableCell";
 import { useGetExchangeRateQuery } from "../../services/GetRates";
@@ -11,7 +11,7 @@ interface ITableProps {
 }
 
 const CurrencyTable = ({ handleCounterReset }: ITableProps) => {
-  const [counter, setCounter] = useState("")
+  // const [counter, setCounter] = useState("")
   const { data, error, isLoading } = useGetExchangeRateQuery("");
   console.log("data", data && JSON.parse(data?.contents));
 
@@ -31,7 +31,7 @@ const CurrencyTable = ({ handleCounterReset }: ITableProps) => {
 
   console.log("counter", JSON.parse(localStorage.getItem("counter") as any));
   console.log("render");
-  // console.log("Error", error);
+  console.log("Error", error);
 
   return (
     <Paper sx={{ width: "95%", borderRadius: 5 }}>
