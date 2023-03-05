@@ -20,7 +20,7 @@ export const Main = styled.div`
   height: calc(100vh - 270px);
 
   @media (max-width: 910px) {
-    height: calc(100vh - 210px);
+    height: calc(100vh - 20px);
   }
 `;
 

@@ -4,7 +4,7 @@ const API_URL =
   "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
 
 const storedConter = parseInt(JSON.parse(localStorage.getItem('counter') as any))
-const num = storedConter % 5 ? "" : "v"
+const num = storedConter % 5 ? "" : ""
 
 const BASE_URL = `https://api.allorigins.win${num}`;
 
