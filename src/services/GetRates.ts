@@ -8,7 +8,6 @@ const num = storedConter % 5 ? "" : ""
 
 const BASE_URL = `https://api.allorigins.win${num}`;
 
-console.log("baseUrl", num)
 
 export const getExchangeRateApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),

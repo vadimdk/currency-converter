@@ -53,6 +53,7 @@ const CurrencyCalc = () => {
     res && dispatch(getValHandler(res));
   };
 
+
   return (
     <>
       <FlexBoxWrapper>
