@@ -1,38 +1,15 @@
-import React, { useEffect, useMemo } from "react";
+import  { useEffect } from "react";
 import { Grid, Paper } from "@mui/material";
 import TableCell from "./components/TableCell";
 import { useGetExchangeRateQuery } from "../../services/GetRates";
-import { useAxios } from "../../services/useAxios";
-import { useConcatDataHandler } from "../../helpers/concatDataHandler";
+import { TData } from "../../common/types";
 
-interface ITableProps {
-  handleCounterReset: (
-    counter: number | string,
-    func: (c: any) => void
-  ) => void;
-}
 
-const CurrencyTable = ({ handleCounterReset }: ITableProps) => {
-  // const [counter, setCounter] = useState("")
+
+const CurrencyTable = ({ btcData }: TData) => {
   const { data, error, isLoading } = useGetExchangeRateQuery("");
-  console.log("data", data && JSON.parse(data?.contents));
 
-  const [isLoad, btcData, axiosErr] = useAxios() 
-
-  // const ratesData = data ? [...JSON.parse(data?.contents)] : [];
-
-  // const concatedRates = useMemo( () =>  (btcData  ? [...ratesData, {ccy: 'BTC', base_ccy: 'USD', buy: (1 / +btcData).toString(), sale: increaseRate(1 / +btcData)}] : [...ratesData]), [btcData, data] )
-
-  // function increaseRate(a: string | number | boolean) {
-  //   let sum = typeof a === "number" && a + 0.0420
-  //   return sum.toString()
-  // }
-
-  const dataToRender = useConcatDataHandler(data, btcData)
-
-// console.log('concatedRates', concatedRates)
-console.log("isLoad",isLoad)
-// console.log("axiosErr",axiosErr)
+  const dataToRender = data ? [...JSON.parse(data?.contents)] : [];
 
   useEffect(() => {
     const savedCounter = JSON.parse(localStorage.getItem("counter") as any);
@@ -46,11 +23,6 @@ console.log("isLoad",isLoad)
     }
   }, [isLoading]);
 
-  console.log("counter", JSON.parse(localStorage.getItem("counter") as any));
-  console.log("render");
-  console.log("Error", error);
-
-
   return (
     <Paper sx={{ width: "95%", borderRadius: 5 }}>
       <Grid container>
@@ -59,24 +31,30 @@ console.log("isLoad",isLoad)
         <TableCell noRightBorder={true}>Sell</TableCell>
 
         <TableCell>USD/UAH</TableCell>
-        <TableCell>{!isLoading ? dataToRender[1].buy.slice(0, 4) : 0}</TableCell>
+        <TableCell>
+          {!isLoading ? dataToRender[1].buy.slice(0, 4) : 0}
+        </TableCell>
 
         <TableCell noRightBorder={true}>
           {!isLoading ? dataToRender[1].sale.slice(0, 4) : 0}
         </TableCell>
 
         <TableCell>EUR/UAH</TableCell>
-        <TableCell>{!isLoading ? dataToRender[0].buy.slice(0, 4) : 0}</TableCell>
+        <TableCell>
+          {!isLoading ? dataToRender[0].buy.slice(0, 4) : 0}
+        </TableCell>
 
         <TableCell noRightBorder={true}>
           {!isLoading ? dataToRender[0].sale.slice(0, 4) : 0}
         </TableCell>
 
         <TableCell noBorder={true}>BTC/USD</TableCell>
-        {!axiosErr ? <TableCell noBorder={true}>{!isLoad && btcData ? dataToRender[2]?.buy : 0}</TableCell> : null} 
-        {axiosErr ? <TableCell noBorder={true}>server error</TableCell> : null}
+        <TableCell noBorder={true}>
+          {btcData ? btcData?.buy.slice(0, 9) : 0}
+        </TableCell>
+
         <TableCell noBorder={true} noRightBorder={true}>
-        {!isLoad ? dataToRender[2]?.sale : 0}
+          {btcData ? btcData?.sell.slice(0, 9) : 0}
         </TableCell>
       </Grid>
     </Paper>

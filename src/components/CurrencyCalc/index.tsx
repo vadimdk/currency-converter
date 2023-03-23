@@ -12,11 +12,15 @@ import {
 } from "../../store/reducers/CurrencySlice";
 import { FlexBoxWrapper, FlexContainer, SwapBtn } from "./styles";
 import CurrencySelect from "./components/CurrencySelect";
-import { useGetExchangeRateQuery } from "../../services/GetRates";
+import {
+  useGetExchangeRateQuery
+} from "../../services/GetRates";
 import { convertFunc } from "../../helpers/helperFunc";
-import { ICurrData } from "../../common/types";
+import { useConcatDataHandler } from "../../helpers/concatDataHandler";
 
-const CurrencyCalc = () => {
+import { TData } from "../../common/types";
+
+const CurrencyCalc = ({ btcData }: TData) => {
   const dispatch = useAppDispatch();
 
   const { firstInputObj, secondInputObj, isReverced } = useAppSelector(
@@ -44,15 +48,20 @@ const CurrencyCalc = () => {
     dispatch(selectSecondHandler(e.target.value));
   };
 
+  
   const { data } = useGetExchangeRateQuery("");
-
-  const ratesDataArr: ICurrData[] = data ? [...JSON.parse(data?.contents)] : [];
+  
+  const dataToRender = useConcatDataHandler(data, btcData);
+  
 
   const handleConvertFunc = () => {
-    const res = convertFunc(firstInputObj, secondInputObj, ratesDataArr);
+    const res = convertFunc(
+      firstInputObj,
+      secondInputObj,
+      dataToRender,
+    );
     res && dispatch(getValHandler(res));
   };
-
 
   return (
     <>
@@ -99,7 +108,12 @@ const CurrencyCalc = () => {
       </FlexBoxWrapper>
       <Button
         variant="contained"
-        disabled={!!firstInputObj.error || !!secondInputObj.error || !!secondInputObj.selError || !!firstInputObj.selError}
+        disabled={
+          !!firstInputObj.error ||
+          !!secondInputObj.error ||
+          !!secondInputObj.selError ||
+          !!firstInputObj.selError
+        }
         sx={{ marginTop: 5 }}
         onClick={handleConvertFunc}
       >

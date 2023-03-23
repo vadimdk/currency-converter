@@ -8,6 +8,16 @@ const num = storedConter % 5 ? "" : ""
 
 const BASE_URL = `https://api.allorigins.win${num}`;
 
+const options = {
+  url: 'https://currencyapi-net.p.rapidapi.com/rates',
+  method: 'GET',
+  params: {output: 'JSON', base: 'USD'},
+headers: {
+  "X-RapidAPI-Key": "471aa56ce8mshe19066546835a27p1fb866jsnaa1d9f6d419e",
+  "X-RapidAPI-Host": "currencyapi-net.p.rapidapi.com"
+}
+};
+
 
 export const getExchangeRateApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
@@ -19,4 +29,15 @@ export const getExchangeRateApi = createApi({
   })
 });
 
+export const getBtcRateApi = createApi({
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://currencyapi-net.p.rapidapi.com/rates' }),
+  reducerPath: "getBtcRateApi",
+  endpoints: (build) => ({
+    getBtcRateApi: build.query({
+      query: () => options
+    })
+  })
+});
+
+export const { useGetBtcRateApiQuery } = getBtcRateApi;
 export const { useGetExchangeRateQuery } = getExchangeRateApi;

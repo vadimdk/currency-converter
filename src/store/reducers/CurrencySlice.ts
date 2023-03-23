@@ -55,6 +55,7 @@ export const currencyToChangeSlice = createSlice({
     },
     selectFirstHandler: (state, action: PayloadAction<string>) => {
       state.firstInputObj.currVal = action.payload;
+      state.secondInputObj.currVal = action.payload === "BTC" ? "USD" : state.secondInputObj.currVal
       state.firstInputObj.selError = incorrectOptions.includes(`${action.payload}/${state.secondInputObj.currVal}`) ? "incorrect option!" : ""
     },
     selectSecondHandler: (state, action: PayloadAction<string>) => {

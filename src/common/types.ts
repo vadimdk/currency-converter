@@ -8,3 +8,11 @@ export interface ICurrData {
 export type CurrInputObj = {
     [key: string]: string;
   };
+
+
+  export type TData = {
+    btcData?: {
+      buy: string;
+      sell: string;
+    };
+  };
