@@ -7,7 +7,7 @@ import { TData } from "../../common/types";
 
 
 const CurrencyTable = ({ btcData }: TData) => {
-  const { data, error, isLoading } = useGetExchangeRateQuery("");
+  const { data, isLoading } = useGetExchangeRateQuery("");
 
   const dataToRender = data ? [...JSON.parse(data?.contents)] : [];
 
