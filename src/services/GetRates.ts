@@ -13,7 +13,7 @@ const options = {
   method: 'GET',
   params: {output: 'JSON', base: 'USD'},
 headers: {
-  "X-RapidAPI-Key": "471aa56ce8mshe19066546835a27p1fb866jsnaa1d9f6d419e",
+  "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
   "X-RapidAPI-Host": "currencyapi-net.p.rapidapi.com"
 }
 };
