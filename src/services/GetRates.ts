@@ -8,7 +8,6 @@ const num = storedConter % 5 ? "" : ""
 
 const BASE_URL = `https://api.allorigins.win${num}`;
 
-console.log('APP', process.env.REACT_APP_API_KEY)
 
 const options = {
   url: 'https://currencyapi-net.p.rapidapi.com/rates',
